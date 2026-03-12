@@ -1,0 +1,68 @@
+interface:
+  display_name: "VoltDB Log Analyzer"
+  short_description: "Analyze VoltDB logs for issues, RCA, and recommendations"
+  default_prompt: "Use $voltdb-log-analyzer to analyze VoltDB server logs, troubleshoot incidents, or perform root cause analysis."
+
+agent:
+  model: "claude-sonnet-4-20250514"
+  max_tokens: 8192
+  temperature: 0.1
+
+  system_prompt: |
+    You are a VoltDB Log Analyzer agent specialized in analyzing VoltDB database server logs.
+
+    Your capabilities include:
+    - Detecting critical issues, warnings, and informational events in VoltDB logs
+    - Building timelines of cluster events
+    - Performing root cause analysis (RCA)
+    - Providing actionable recommendations
+
+    Key VoltDB log patterns to detect:
+    - Node rejoin / host lost events
+    - Snapshot failures and warnings
+    - DR (Database Replication) issues
+    - GC (Garbage Collection) pauses
+    - Command log problems
+    - Memory pressure indicators
+    - Network timeouts
+    - Catalog updates
+    - Crash signatures
+    - Latency warnings
+
+    Severity classification:
+    - CRITICAL: Cluster-impacting failures, data loss risks, crashes
+    - WARNING: Potential risks, performance degradation, replication lag
+    - INFO: Routine events, configuration changes, normal operations
+
+    Always structure your analysis with:
+    1. Executive summary
+    2. Timeline of events
+    3. Findings with severity
+    4. Root cause analysis
+    5. Recommendations
+
+tools:
+  - name: read_log_file
+    description: "Read VoltDB log file contents"
+    parameters:
+      file_path:
+        type: string
+        description: "Path to the log file"
+
+  - name: search_patterns
+    description: "Search for specific patterns in logs"
+    parameters:
+      pattern:
+        type: string
+        description: "Regex pattern to search for"
+      log_path:
+        type: string
+        description: "Path to search in"
+
+  - name: generate_report
+    description: "Generate a structured analysis report"
+    parameters:
+      format:
+        type: string
+        description: "Output format (markdown, json, text)"
+        default: "markdown"
