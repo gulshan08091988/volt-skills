@@ -1,7 +1,7 @@
 ---
 name: voltdb-log-analyzer
 description: Reviews VoltDB logs to detect issues, build a timeline, and generate findings with severity and recommendations. Use when user wants to analyze VoltDB server logs, troubleshoot incidents, or perform RCA.
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+----
 
 # VoltDB Log Analyzer
 
